@@ -177,18 +177,18 @@ public class TableDirector: NSObject, UITableViewDelegate, UITableViewDataSource
 			}
 		}
 		
-		if #available(iOS 11.0, *) {
-			self.tableView?.performBatchUpdates({
-				executeDiffAndUpdate()
-			}, completion: { end in
-				if end { onEnd?() }
-			})
-		} else {
+//        if #available(iOS 11.0, *) {
+//            self.tableView?.performBatchUpdates({
+//                executeDiffAndUpdate()
+//            }, completion: { end in
+//                if end { onEnd?() }
+//            })
+//        } else {
 			self.tableView?.beginUpdates()
 			executeDiffAndUpdate()
 			self.tableView?.endUpdates()
 			DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: { onEnd?() })
-		}
+//        }
 	}
 	
 	/// Change the content of the table.
